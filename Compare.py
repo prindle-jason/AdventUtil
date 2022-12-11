@@ -1,0 +1,1 @@
+compare = lambda a, b : 1 if a > b else -1 if a < b else 0
