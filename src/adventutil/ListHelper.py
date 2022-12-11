@@ -24,9 +24,6 @@ def __test():
 
     split_actual = list_split(split_input, split_delimiter)
     print(split_actual == split_expected)
-    #print(split_actual)
-    #print(split_expected)
-    
 
 if __name__ == "__main__":
     __test()

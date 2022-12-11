@@ -60,8 +60,5 @@ def __test():
     actual = get_string_grid(input,';')
     print("Test 5 result = {b}".format(b=expected==actual))
 
-    
-    
-
 if __name__ == "__main__":
     __test()

@@ -10,8 +10,13 @@ INPUT_URI = PROBLEM_URI + '/input'
 RES_DIR = 'resources/'
 COOKIE_FILE = RES_DIR + 'cookie.txt'
 USER_AGENT_FILE = RES_DIR + 'user-agent.txt'
-INPUT_FILE = RES_DIR + 'day{d}.txt'
-SAMPLE_FILE = RES_DIR + 'day{d}sample.txt'
+
+INPUT_FILE_NAME = 'day{d}.txt'
+LIVE_INPUT_DIR = 'live-input/'
+SAMPLE_INPUT_DIR = 'sample-input/'
+
+INPUT_FILE = RES_DIR + LIVE_INPUT_DIR + INPUT_FILE_NAME
+SAMPLE_FILE = RES_DIR + SAMPLE_INPUT_DIR + INPUT_FILE_NAME
 
 class InputType(Enum):
     SAMPLE_DATA = 0,
@@ -28,7 +33,7 @@ def readLines(year, day, stripped=True):
     
 def get_sample_data(year, day, stripped=True):
     if not file_exists(SAMPLE_FILE.format(d=day)):
-        session_id = __file_read(COOKIE_FILE)
+        session_id = __file_read(COOKIE_FILE).removeprefix('session=')
         user_agent = __file_read(USER_AGENT_FILE)
 
         uri = PROBLEM_URI.format(y=year, d=day)
@@ -44,7 +49,7 @@ def get_sample_data(year, day, stripped=True):
 
 def __load_aoc_data(year, day):
     if not file_exists(INPUT_FILE.format(d=day)):
-        session_id = __file_read(COOKIE_FILE)
+        session_id = __file_read(COOKIE_FILE).removeprefix('session=')
         user_agent = __file_read(USER_AGENT_FILE)
 
         uri = INPUT_URI.format(y=year, d=day)
@@ -63,6 +68,3 @@ def __file_readlines(file_path):
 def __file_create(file_path, data):
     with open(file_path, 'x') as f:
         f.write(data)
-
-if __name__ == "__main__":
-    get_sample_data(2022,6)
